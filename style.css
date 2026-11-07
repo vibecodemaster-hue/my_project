@@ -3,9 +3,11 @@
    ========================================================================== */
 
 :root {
-  --color-bg-dark: #070e1b;
-  --color-bg-darker: #040810;
-  --color-bg-card: rgba(18, 30, 49, 0.65);
+  /* 다크모드 (기본) 색상 */
+  --color-body-bg: radial-gradient(circle at top center, #132a45 0%, #081424 50%, #030811 100%);
+  --color-nav-bg: rgba(14, 28, 48, 0.65);
+  --color-nav-scrolled: rgba(8, 18, 33, 0.92);
+  --color-bg-card: rgba(18, 30, 49, 0.68);
   --color-border: rgba(255, 255, 255, 0.14);
   --color-border-glow: rgba(255, 215, 0, 0.35);
 
@@ -19,11 +21,21 @@
 
   --color-gold: #ffbe0b;
   --color-gold-light: #ffd166;
+  --color-gold-text: #ffd166;
   --color-gold-glow: rgba(255, 190, 11, 0.5);
 
   --color-text-main: #f8f9fa;
+  --color-text-title: #ffffff;
   --color-text-muted: #b0c4de;
   --color-text-dim: #778da9;
+
+  --color-input-bg: rgba(255, 255, 255, 0.06);
+  --color-input-border: rgba(255, 255, 255, 0.14);
+  --color-input-text: #ffffff;
+
+  --timer-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+  --tree-stage-bg: radial-gradient(circle at center, rgba(27, 67, 50, 0.4) 0%, rgba(7, 14, 27, 0.7) 100%);
+  --footer-bg: #03060c;
 
   --font-main: 'Outfit', 'Noto Sans KR', -apple-system, sans-serif;
   --font-festive: 'Mountains of Christmas', cursive;
@@ -37,6 +49,38 @@
   --shadow-glow: 0 0 25px rgba(255, 215, 0, 0.25);
   --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.45);
   --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* ==========================================================================
+   화이트모드 (스노우 화이트 / 라이트 테마)
+   ========================================================================== */
+[data-theme="light"] {
+  --color-body-bg: radial-gradient(circle at top center, #f4f8fc 0%, #e8f1fb 50%, #d8e6f8 100%);
+  --color-nav-bg: rgba(255, 255, 255, 0.82);
+  --color-nav-scrolled: rgba(245, 249, 255, 0.96);
+  --color-bg-card: rgba(255, 255, 255, 0.86);
+  --color-border: rgba(180, 205, 230, 0.65);
+  --color-border-glow: rgba(212, 160, 23, 0.35);
+
+  --color-text-main: #2b3a4a;
+  --color-text-title: #0f1c2e;
+  --color-text-muted: #4e637a;
+  --color-text-dim: #70859c;
+
+  --color-gold: #c68a00;
+  --color-gold-light: #9d6e00;
+  --color-gold-text: #825b00;
+  --color-gold-glow: rgba(198, 138, 0, 0.3);
+
+  --color-input-bg: rgba(255, 255, 255, 0.95);
+  --color-input-border: rgba(180, 205, 230, 0.9);
+  --color-input-text: #1d2d44;
+
+  --timer-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(235, 243, 253, 0.88) 100%);
+  --tree-stage-bg: radial-gradient(circle at center, rgba(180, 225, 205, 0.45) 0%, rgba(210, 228, 246, 0.85) 100%);
+  --footer-bg: #d7e4f2;
+
+  --shadow-card: 0 10px 30px rgba(50, 85, 125, 0.12);
 }
 
 /* Base Reset */
@@ -53,12 +97,13 @@ html {
 
 body {
   font-family: var(--font-main);
-  background: radial-gradient(circle at top center, #132a45 0%, #081424 50%, #030811 100%);
+  background: var(--color-body-bg);
   color: var(--color-text-main);
   min-height: 100vh;
   overflow-x: hidden;
   position: relative;
   line-height: 1.6;
+  transition: background 0.4s ease, color 0.4s ease;
 }
 
 /* 캔버스 (눈, 폭죽) */
@@ -191,11 +236,11 @@ body {
 
 .navbar.scrolled {
   top: 0;
-  background: rgba(8, 18, 33, 0.88);
+  background: var(--color-nav-scrolled);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--color-border);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   padding: 8px 24px;
 }
 
@@ -205,11 +250,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(14, 28, 48, 0.55);
+  background: var(--color-nav-bg);
   backdrop-filter: blur(12px);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-full);
   padding: 8px 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   transition: var(--transition-smooth);
 }
 
@@ -269,6 +315,37 @@ body {
   display: flex;
   align-items: center;
   gap: 12px;
+}
+
+.theme-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-main);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.theme-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: var(--color-gold-light);
+  transform: translateY(-1px);
+}
+
+.theme-icon {
+  font-size: 1rem;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.theme-toggle-btn:hover .theme-icon {
+  transform: rotate(20deg) scale(1.15);
 }
 
 .bgm-btn {
@@ -567,7 +644,7 @@ main {
 }
 
 .timer-card {
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+  background: var(--timer-bg);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: 24px 20px;
@@ -1900,5 +1977,183 @@ main {
   .gift-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* ==========================================================================
+   화이트모드 (Light Theme) 컴포넌트 상세 스타일
+   ========================================================================== */
+[data-theme="light"] .section-title,
+[data-theme="light"] .hero-title,
+[data-theme="light"] .form-title,
+[data-theme="light"] .panel-title,
+[data-theme="light"] .quiz-question-title,
+[data-theme="light"] .result-character-name,
+[data-theme="light"] .timer-number,
+[data-theme="light"] .track-title,
+[data-theme="light"] .modal-title,
+[data-theme="light"] .modal-author {
+  color: var(--color-text-title);
+  text-shadow: none;
+}
+
+[data-theme="light"] .badge-pill {
+  background: rgba(255, 255, 255, 0.7);
+  border-color: rgba(180, 205, 230, 0.8);
+  color: var(--color-gold-text);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .highlight-gold {
+  color: #c78000;
+  text-shadow: 0 0 15px rgba(255, 180, 0, 0.4);
+}
+
+[data-theme="light"] .nav-link {
+  color: var(--color-text-muted);
+}
+[data-theme="light"] .nav-link:hover,
+[data-theme="light"] .nav-link.active {
+  color: var(--color-text-title);
+  background: rgba(0, 0, 0, 0.06);
+  text-shadow: none;
+}
+
+[data-theme="light"] .form-group input,
+[data-theme="light"] .form-group textarea {
+  background: var(--color-input-bg);
+  border-color: var(--color-input-border);
+  color: var(--color-input-text);
+}
+
+[data-theme="light"] .form-group input::placeholder,
+[data-theme="light"] .form-group textarea::placeholder {
+  color: #92a4b8;
+}
+
+[data-theme="light"] .ornament-choice {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.1);
+  color: var(--color-text-muted);
+}
+[data-theme="light"] .ornament-choice:hover,
+[data-theme="light"] .ornament-choice.active {
+  background: rgba(0, 0, 0, 0.09);
+  border-color: var(--color-gold);
+  color: var(--color-text-title);
+}
+
+[data-theme="light"] .gift-box-item {
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 8px 20px rgba(50, 85, 125, 0.08);
+}
+[data-theme="light"] .gift-hint {
+  color: var(--color-text-title);
+}
+
+[data-theme="light"] .track-btn {
+  background: rgba(255, 255, 255, 0.7);
+  border-color: rgba(180, 205, 230, 0.7);
+  color: var(--color-text-main);
+}
+[data-theme="light"] .track-btn:hover {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: var(--color-gold);
+}
+[data-theme="light"] .track-btn.active {
+  background: rgba(239, 35, 60, 0.15);
+  border-color: var(--color-red-bright);
+}
+
+[data-theme="light"] .theme-btn {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.1);
+  color: var(--color-text-muted);
+}
+[data-theme="light"] .theme-btn:hover,
+[data-theme="light"] .theme-btn.active {
+  background: rgba(0, 0, 0, 0.08);
+  border-color: var(--color-gold);
+  color: var(--color-text-title);
+}
+
+[data-theme="light"] .quiz-option-btn {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(180, 205, 230, 0.7);
+  color: var(--color-text-main);
+  box-shadow: 0 4px 12px rgba(50, 85, 125, 0.06);
+}
+[data-theme="light"] .quiz-option-btn:hover {
+  background: #ffffff;
+  border-color: var(--color-gold);
+  box-shadow: 0 6px 18px rgba(50, 85, 125, 0.12);
+}
+
+[data-theme="light"] .result-match-box {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(180, 205, 230, 0.7);
+  color: var(--color-text-muted);
+}
+[data-theme="light"] .result-match-box strong {
+  color: var(--color-text-title);
+}
+
+[data-theme="light"] .modal-card {
+  background: linear-gradient(145deg, #ffffff 0%, #f0f6fd 100%);
+  border-color: var(--color-gold);
+  box-shadow: 0 25px 60px rgba(50, 85, 125, 0.25);
+}
+[data-theme="light"] .modal-message,
+[data-theme="light"] .gift-modal-body {
+  color: var(--color-text-main);
+}
+[data-theme="light"] .gift-modal-extra {
+  background: rgba(235, 245, 255, 0.7);
+  border-color: var(--color-gold);
+  color: var(--color-text-title);
+}
+
+[data-theme="light"] .footer {
+  background: var(--footer-bg);
+  border-top: 1px solid rgba(180, 205, 230, 0.5);
+}
+[data-theme="light"] .footer-snow-hill {
+  background: radial-gradient(ellipse at top, rgba(255, 255, 255, 0.8) 0%, transparent 70%);
+}
+[data-theme="light"] .footer-logo {
+  color: var(--color-gold-text);
+}
+[data-theme="light"] .footer-links a {
+  color: var(--color-text-muted);
+}
+[data-theme="light"] .footer-links a:hover {
+  color: var(--color-gold-text);
+}
+[data-theme="light"] .footer-copy {
+  color: var(--color-text-dim);
+}
+
+[data-theme="light"] .toast {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: var(--color-gold);
+  color: var(--color-text-title);
+  box-shadow: 0 10px 30px rgba(50, 85, 125, 0.2);
+}
+
+[data-theme="light"] .back-to-top {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(180, 205, 230, 0.8);
+  color: var(--color-text-title);
+  box-shadow: 0 6px 20px rgba(50, 85, 125, 0.15);
+}
+[data-theme="light"] .back-to-top:hover {
+  background: var(--color-red-bright);
+  color: #fff;
+}
+
+[data-theme="light"] .mobile-menu-btn span {
+  background: var(--color-text-title);
+}
+[data-theme="light"] .nav-links {
+  background: rgba(250, 252, 255, 0.98);
 }
 
