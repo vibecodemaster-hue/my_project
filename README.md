@@ -1,4 +1,4 @@
-# 🎄 Merry Christmas & Happy Holidays ❄️
+# 🎅 Merry Christmas & Happy Holidays ❄️
 > 따뜻한 온기와 반짝이는 설렘이 가득한 **인터랙티브 크리스마스 원페이지 웹사이트**
 
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)

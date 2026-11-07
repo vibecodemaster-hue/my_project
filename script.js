@@ -689,6 +689,60 @@ function initCarolSynthesizer() {
     return audioCtx;
   }
 
+  // 크리스마스 인터랙티브 효과음 (SFX)
+  window.playChristmasSfx = function (type) {
+    try {
+      const ctx = getAudioContext();
+      const now = ctx.currentTime;
+
+      if (type === 'bell') {
+        // 딸랑딸랑 은방울 소리 (고음역 맑은 2연타)
+        [1046.5, 1318.5].forEach((freq, i) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(freq, now + i * 0.08);
+          gain.gain.setValueAtTime(0.18, now + i * 0.08);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.08 + 0.35);
+          osc.connect(gain);
+          gain.connect(masterGain);
+          osc.start(now + i * 0.08);
+          osc.stop(now + i * 0.08 + 0.36);
+        });
+      } else if (type === 'magic') {
+        // 마법 차임 아르페지오 (C5 -> E5 -> G5 -> C6)
+        [523.25, 659.25, 783.99, 1046.5].forEach((freq, i) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, now + i * 0.07);
+          gain.gain.setValueAtTime(0.2, now + i * 0.07);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.07 + 0.45);
+          osc.connect(gain);
+          gain.connect(masterGain);
+          osc.start(now + i * 0.07);
+          osc.stop(now + i * 0.07 + 0.46);
+        });
+      } else if (type === 'sparkle') {
+        // 반짝임 차임
+        [880.0, 1174.6, 1760.0].forEach((freq, i) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(freq, now + i * 0.05);
+          gain.gain.setValueAtTime(0.15, now + i * 0.05);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.05 + 0.3);
+          osc.connect(gain);
+          gain.connect(masterGain);
+          osc.start(now + i * 0.05);
+          osc.stop(now + i * 0.05 + 0.31);
+        });
+      }
+    } catch (e) {
+      // 오류 무시
+    }
+  };
+
   // 벨/오르골 사운드 단일 음 합성 함수
   function playChimeNote(freq, durationSec) {
     if (freq <= 0) return;
