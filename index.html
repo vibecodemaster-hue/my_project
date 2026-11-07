@@ -1,34 +1,39 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Merry Christmas & Happy Holidays 🎄</title>
   <meta name="description" content="따뜻하고 반짝이는 크리스마스 원페이지 웹사이트 - 소원 트리, 캐롤 오르골, 선물 상자, 카드 만들기">
-  
+
   <!-- Favicon (Emoji Santa) -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎅</text></svg>">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎅</text></svg>">
 
   <!-- Open Graph / SNS 공유 메타태그 -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Merry Christmas & Happy Holidays 🎄">
   <meta property="og:description" content="따뜻한 온기와 설렘이 가득한 크리스마스! 소원을 빌고 오르골 캐롤과 나만의 카드를 만들어보세요.">
   <meta property="og:locale" content="ko_KR">
-  
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Mountains+of+Christmas:wght@700&family=Noto+Sans+KR:wght@300;400;600;700;900&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Mountains+of+Christmas:wght@700&family=Noto+Sans+KR:wght@300;400;600;700;900&family=Outfit:wght@400;600;800&display=swap"
+    rel="stylesheet">
+
   <link rel="stylesheet" href="style.css">
   <script>
     // 테마 플리커(FOUC) 방지 초기화
-    (function() {
+    (function () {
       const savedTheme = localStorage.getItem('christmas_theme') || 'dark';
       document.documentElement.setAttribute('data-theme', savedTheme);
     })();
   </script>
 </head>
+
 <body>
   <!-- 눈 내리는 캔버스 배경 -->
   <canvas id="snow-canvas"></canvas>
@@ -39,10 +44,38 @@
   <!-- 상단 전구 스트링 조명 장식 -->
   <div class="fairy-lights-container" aria-hidden="true">
     <ul class="fairy-lights">
-      <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
-      <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
-      <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
-      <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
     </ul>
   </div>
 
@@ -207,7 +240,8 @@
 
               <div class="form-group">
                 <label for="wish-text">나의 소원 메시지</label>
-                <textarea id="wish-text" rows="3" placeholder="이번 겨울 이루고 싶은 따뜻한 소원을 적어주세요!" maxlength="80" required></textarea>
+                <textarea id="wish-text" rows="3" placeholder="이번 겨울 이루고 싶은 따뜻한 소원을 적어주세요!" maxlength="80"
+                  required></textarea>
                 <div class="char-count"><span id="char-num">0</span>/80</div>
               </div>
 
@@ -230,7 +264,8 @@
                   <span class="color-opt" data-color="#06d6a0" style="background:#06d6a0;"></span>
                   <span class="color-opt" data-color="#118ab2" style="background:#118ab2;"></span>
                   <span class="color-opt" data-color="#ff70a6" style="background:#ff70a6;"></span>
-                  <span class="color-opt" data-color="#f8f9fa" style="background:#ffffff; border:1px solid #ccc;"></span>
+                  <span class="color-opt" data-color="#f8f9fa"
+                    style="background:#ffffff; border:1px solid #ccc;"></span>
                 </div>
               </div>
 
@@ -420,7 +455,8 @@
 
           <div class="form-group">
             <label for="card-message">메시지 (Message)</label>
-            <textarea id="card-message" rows="4" maxlength="150">올 한 해 정말 수고 많았어요! 따뜻하고 웃음 가득한 크리스마스 보내시고, 새해에는 바라는 모든 꿈이 이루어지길 응원합니다. 메리 크리스마스! 🎄</textarea>
+            <textarea id="card-message" rows="4"
+              maxlength="150">올 한 해 정말 수고 많았어요! 따뜻하고 웃음 가득한 크리스마스 보내시고, 새해에는 바라는 모든 꿈이 이루어지길 응원합니다. 메리 크리스마스! 🎄</textarea>
           </div>
 
           <div class="form-group">
@@ -467,7 +503,7 @@
 
               <div class="card-inner-frame">
                 <div class="card-header-badge">★ Merry Christmas & Happy New Year ★</div>
-                
+
                 <div class="card-art-illustration">
                   <div class="art-icon">🎅✨🦌</div>
                 </div>
@@ -608,5 +644,5 @@
 
   <script src="script.js"></script>
 </body>
-</html>
 
+</html>
