@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Merry Christmas & Happy Holidays 🎄</title>
+  <meta name="description" content="따뜻하고 반짝이는 크리스마스 원페이지 웹사이트 - 소원 트리, 캐롤 오르골, 선물 상자, 카드 만들기">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Mountains+of+Christmas:wght@700&family=Noto+Sans+KR:wght@300;400;600;700;900&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 눈 내리는 캔버스 배경 -->
+  <canvas id="snow-canvas"></canvas>
+
+  <!-- 파티클/폭죽 캔버스 -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- 상단 전구 스트링 조명 장식 -->
+  <div class="fairy-lights-container" aria-hidden="true">
+    <ul class="fairy-lights">
+      <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+      <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+      <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+      <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+    </ul>
+  </div>
+
+  <!-- 헤더 & 네비게이션 -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#hero" class="nav-logo">
+        <span class="logo-icon">🎄</span>
+        <span class="logo-text">Merry Holiday</span>
+      </a>
+
+      <nav class="nav-links" id="nav-links">
+        <a href="#hero" class="nav-link active">홈</a>
+        <a href="#countdown" class="nav-link">D-Day</a>
+        <a href="#tree-section" class="nav-link">소원 트리</a>
+        <a href="#gift-section" class="nav-link">선물 상자</a>
+        <a href="#carol-section" class="nav-link">캐롤 오르골</a>
+        <a href="#card-section" class="nav-link">카드 만들기</a>
+        <a href="#quiz-section" class="nav-link">성향 테스트</a>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- BGM 토글 버튼 -->
+        <button id="bgm-toggle-btn" class="bgm-btn" title="캐롤 배경음악 켜기/끄기">
+          <span class="bgm-icon">🎵</span>
+          <span class="bgm-text">BGM Off</span>
+        </button>
+
+        <!-- 모바일 햄버거 메뉴 -->
+        <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="메뉴 열기">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- 1. 히어로 섹션 -->
+    <section id="hero" class="hero-section">
+      <div class="hero-content">
+        <div class="badge-pill">✨ The Most Wonderful Time of the Year</div>
+        <h1 class="hero-title">
+          따뜻한 온기와 설렘이 가득한<br>
+          <span class="highlight-gold">Merry Christmas!</span> 🎅
+        </h1>
+        <p class="hero-subtitle">
+          하얗게 내리는 눈송이처럼 포근하고 빛나는 크리스마스를 선물합니다.<br>
+          트리에 소원을 걸고, 오르골 캐롤과 함께 특별한 하루를 시작해보세요.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="#tree-section" class="btn btn-primary">
+            <span>소원 남기기</span> 🌟
+          </a>
+          <a href="#carol-section" class="btn btn-secondary">
+            <span>캐롤 감상하기</span> 🎶
+          </a>
+          <a href="#card-section" class="btn btn-gold">
+            <span>카드 만들기</span> 💌
+          </a>
+        </div>
+      </div>
+
+      <!-- 인터랙티브 플로팅 데코레이션 -->
+      <div class="hero-floating-decor">
+        <div class="floating-item item-santa" title="호호호! 메리 크리스마스!">🎅</div>
+        <div class="floating-item item-rudolph" title="루돌프 사슴코는 매우 반짝이는 코~">🦌</div>
+        <div class="floating-item item-snowman" title="눈사람 만들기!">⛄</div>
+        <div class="floating-item item-gift" title="선물이 있어요!">🎁</div>
+      </div>
+    </section>
+
+    <!-- 2. 크리스마스 카운트다운 섹션 -->
+    <section id="countdown" class="section-container countdown-section">
+      <div class="section-header">
+        <div class="section-tag">COUNTDOWN</div>
+        <h2 class="section-title">크리스마스까지 남은 시간 ⏰</h2>
+        <p class="section-desc">설레는 마음으로 크리스마스 아침을 기다려보아요!</p>
+      </div>
+
+      <div class="countdown-wrapper">
+        <div class="timer-card">
+          <div class="timer-number" id="days">00</div>
+          <div class="timer-label">DAYS</div>
+          <div class="timer-deco">🎄</div>
+        </div>
+        <div class="timer-colon">:</div>
+        <div class="timer-card">
+          <div class="timer-number" id="hours">00</div>
+          <div class="timer-label">HOURS</div>
+          <div class="timer-deco">⭐</div>
+        </div>
+        <div class="timer-colon">:</div>
+        <div class="timer-card">
+          <div class="timer-number" id="minutes">00</div>
+          <div class="timer-label">MINUTES</div>
+          <div class="timer-deco">🔔</div>
+        </div>
+        <div class="timer-colon">:</div>
+        <div class="timer-card">
+          <div class="timer-number" id="seconds">00</div>
+          <div class="timer-label">SECONDS</div>
+          <div class="timer-deco">❄️</div>
+        </div>
+      </div>
+
+      <div class="countdown-status" id="countdown-status-msg">
+        반짝이는 크리스마스를 손꼽아 기다리고 있어요!
+      </div>
+    </section>
+
+    <!-- 3. 인터랙티브 소원 트리 섹션 -->
+    <section id="tree-section" class="section-container tree-section">
+      <div class="section-header">
+        <div class="section-tag">WISHING TREE</div>
+        <h2 class="section-title">모두의 크리스마스 소원 트리 🌲</h2>
+        <p class="section-desc">
+          트리에 당신만의 오너먼트와 소원을 걸어보세요. 달아둔 오너먼트를 클릭하면 소원을 볼 수 있어요!
+        </p>
+      </div>
+
+      <div class="tree-layout">
+        <!-- 왼쪽: 대형 크리스마스 트리 캔버스/보드 -->
+        <div class="tree-display-container">
+          <div class="tree-stage" id="tree-stage">
+            <!-- 별 꼭대기 -->
+            <div class="tree-top-star">⭐</div>
+            <!-- 트리 그래픽 레이어 -->
+            <div class="tree-body">
+              <div class="tree-tier tier-1"></div>
+              <div class="tree-tier tier-2"></div>
+              <div class="tree-tier tier-3"></div>
+              <div class="tree-tier tier-4"></div>
+              <div class="tree-trunk"></div>
+            </div>
+
+            <!-- 오너먼트들이 렌더링되는 인터랙티브 레이어 -->
+            <div class="tree-ornaments-layer" id="tree-ornaments-layer">
+              <!-- JS로 동적 생성된 오너먼트들이 배치됨 -->
+            </div>
+          </div>
+          <div class="tree-bottom-snow">
+            <div class="snow-ground"></div>
+          </div>
+        </div>
+
+        <!-- 오른쪽: 소원 입력 폼 & 최근 소원 목록 -->
+        <div class="tree-control-panel">
+          <div class="card-glass wish-form-card">
+            <h3 class="form-title">✨ 소원 오너먼트 달기</h3>
+            <form id="wish-form">
+              <div class="form-group">
+                <label for="wish-author">작성자 이름</label>
+                <input type="text" id="wish-author" placeholder="닉네임이나 이름 (예: 눈꽃송이)" maxlength="12" required>
+              </div>
+
+              <div class="form-group">
+                <label for="wish-text">나의 소원 메시지</label>
+                <textarea id="wish-text" rows="3" placeholder="이번 겨울 이루고 싶은 따뜻한 소원을 적어주세요!" maxlength="80" required></textarea>
+                <div class="char-count"><span id="char-num">0</span>/80</div>
+              </div>
+
+              <div class="form-group">
+                <label>오너먼트 모양 고르기</label>
+                <div class="ornament-picker" id="ornament-picker">
+                  <button type="button" class="ornament-choice active" data-shape="ball">🔴 방울</button>
+                  <button type="button" class="ornament-choice" data-shape="star">⭐ 별</button>
+                  <button type="button" class="ornament-choice" data-shape="candy">🍬 사탕</button>
+                  <button type="button" class="ornament-choice" data-shape="bell">🔔 종</button>
+                  <button type="button" class="ornament-choice" data-shape="cookie">🍪 쿠키</button>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>오너먼트 색상</label>
+                <div class="color-picker" id="color-picker">
+                  <span class="color-opt active" data-color="#e63946" style="background:#e63946;"></span>
+                  <span class="color-opt" data-color="#ffd166" style="background:#ffd166;"></span>
+                  <span class="color-opt" data-color="#06d6a0" style="background:#06d6a0;"></span>
+                  <span class="color-opt" data-color="#118ab2" style="background:#118ab2;"></span>
+                  <span class="color-opt" data-color="#ff70a6" style="background:#ff70a6;"></span>
+                  <span class="color-opt" data-color="#f8f9fa" style="background:#ffffff; border:1px solid #ccc;"></span>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block">
+                <span>트리에 오너먼트 걸기</span> 🎄
+              </button>
+            </form>
+          </div>
+
+          <div class="card-glass wish-stats-card">
+            <div class="stats-header">
+              <span>현재 걸린 소원: <strong id="wish-count-num">0</strong>개</span>
+              <button id="reset-wishes-btn" class="btn-text-subtle" title="기본 소원으로 초기화">초기화</button>
+            </div>
+            <p class="stats-tip">💡 달린 오너먼트를 클릭하면 소원 카드가 열려요!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. 산타의 시크릿 선물 상자 섹션 -->
+    <section id="gift-section" class="section-container gift-section">
+      <div class="section-header">
+        <div class="section-tag">LUCKY GIFT BOX</div>
+        <h2 class="section-title">산타의 시크릿 선물 상자 🎁</h2>
+        <p class="section-desc">
+          마음에 드는 선물 상자를 하나 골라 클릭해보세요! 오늘의 행운 메시지와 특별 선물이 숨어있어요.
+        </p>
+      </div>
+
+      <div class="gift-grid">
+        <!-- 6개의 선물 상자 -->
+        <div class="gift-box-item" data-gift-id="1">
+          <div class="gift-box-visual box-red">
+            <div class="gift-lid"></div>
+            <div class="gift-ribbon-vertical"></div>
+            <div class="gift-ribbon-horizontal"></div>
+            <div class="gift-bow">🎀</div>
+          </div>
+          <span class="gift-number">No. 1</span>
+          <span class="gift-hint">루돌프의 상자</span>
+        </div>
+
+        <div class="gift-box-item" data-gift-id="2">
+          <div class="gift-box-visual box-green">
+            <div class="gift-lid"></div>
+            <div class="gift-ribbon-vertical"></div>
+            <div class="gift-ribbon-horizontal"></div>
+            <div class="gift-bow">🎀</div>
+          </div>
+          <span class="gift-number">No. 2</span>
+          <span class="gift-hint">눈사람의 상자</span>
+        </div>
+
+        <div class="gift-box-item" data-gift-id="3">
+          <div class="gift-box-visual box-gold">
+            <div class="gift-lid"></div>
+            <div class="gift-ribbon-vertical"></div>
+            <div class="gift-ribbon-horizontal"></div>
+            <div class="gift-bow">🎀</div>
+          </div>
+          <span class="gift-number">No. 3</span>
+          <span class="gift-hint">산타의 비밀 상자</span>
+        </div>
+
+        <div class="gift-box-item" data-gift-id="4">
+          <div class="gift-box-visual box-blue">
+            <div class="gift-lid"></div>
+            <div class="gift-ribbon-vertical"></div>
+            <div class="gift-ribbon-horizontal"></div>
+            <div class="gift-bow">🎀</div>
+          </div>
+          <span class="gift-number">No. 4</span>
+          <span class="gift-hint">요정의 상자</span>
+        </div>
+
+        <div class="gift-box-item" data-gift-id="5">
+          <div class="gift-box-visual box-purple">
+            <div class="gift-lid"></div>
+            <div class="gift-ribbon-vertical"></div>
+            <div class="gift-ribbon-horizontal"></div>
+            <div class="gift-bow">🎀</div>
+          </div>
+          <span class="gift-number">No. 5</span>
+          <span class="gift-hint">진저쿠키의 상자</span>
+        </div>
+
+        <div class="gift-box-item" data-gift-id="6">
+          <div class="gift-box-visual box-silver">
+            <div class="gift-lid"></div>
+            <div class="gift-ribbon-vertical"></div>
+            <div class="gift-ribbon-horizontal"></div>
+            <div class="gift-bow">🎀</div>
+          </div>
+          <span class="gift-number">No. 6</span>
+          <span class="gift-hint">오로라의 상자</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. 크리스마스 캐롤 오르골 주크박스 -->
+    <section id="carol-section" class="section-container carol-section">
+      <div class="section-header">
+        <div class="section-tag">CAROL MUSIC BOX</div>
+        <h2 class="section-title">크리스마스 캐롤 오르골 🎶</h2>
+        <p class="section-desc">
+          브라우저 신디사이저로 연주되는 맑고 영롱한 오르골 캐롤 멜로디를 감상해보세요.
+        </p>
+      </div>
+
+      <div class="jukebox-container card-glass">
+        <div class="music-disc-wrap">
+          <div class="music-disc" id="music-disc">
+            <div class="disc-inner">
+              <span class="disc-icon">❄️</span>
+            </div>
+          </div>
+          <div class="music-note-float" id="note-float">🎵</div>
+        </div>
+
+        <div class="jukebox-controls">
+          <div class="current-track-info">
+            <span class="track-badge">NOW PLAYING</span>
+            <h3 class="track-title" id="track-title">Jingle Bells (징글벨)</h3>
+            <p class="track-desc" id="track-desc">경쾌한 방울소리와 함께 달리는 썰매의 멜로디</p>
+          </div>
+
+          <!-- 트랙 선택 버튼들 -->
+          <div class="track-list">
+            <button class="track-btn active" data-track="jingleBells">
+              <span class="t-num">1</span>
+              <span class="t-name">Jingle Bells</span>
+              <span class="t-badge">신남</span>
+            </button>
+            <button class="track-btn" data-track="weWishYou">
+              <span class="t-num">2</span>
+              <span class="t-name">We Wish You A Merry Christmas</span>
+              <span class="t-badge">행복</span>
+            </button>
+            <button class="track-btn" data-track="silentNight">
+              <span class="t-num">3</span>
+              <span class="t-name">Silent Night (고요한 밤)</span>
+              <span class="t-badge">감성</span>
+            </button>
+            <button class="track-btn" data-track="joyToTheWorld">
+              <span class="t-num">4</span>
+              <span class="t-name">Joy to the World (기쁘다 구주 오셨네)</span>
+              <span class="t-badge">웅장</span>
+            </button>
+          </div>
+
+          <!-- 재생/일시정지 및 볼륨 바 -->
+          <div class="playback-bar">
+            <button id="carol-play-btn" class="btn btn-primary play-btn-large">
+              <span id="play-btn-icon">▶</span>
+              <span id="play-btn-text">캐롤 재생하기</span>
+            </button>
+
+            <div class="volume-slider-wrap">
+              <span class="volume-icon">🔊</span>
+              <input type="range" id="volume-slider" min="0" max="1" step="0.05" value="0.7">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. 크리스마스 카드 제작기 섹션 -->
+    <section id="card-section" class="section-container card-section">
+      <div class="section-header">
+        <div class="section-tag">HOLIDAY CARD</div>
+        <h2 class="section-title">나만의 크리스마스 엽서 만들기 💌</h2>
+        <p class="section-desc">
+          소중한 사람에게 보낼 따뜻한 크리스마스 카드를 작성하고 이미지로 저장해보세요!
+        </p>
+      </div>
+
+      <div class="card-generator-layout">
+        <!-- 카드 옵션 폼 -->
+        <div class="card-editor-panel card-glass">
+          <h3 class="panel-title">✏️ 카드 내용 작성</h3>
+
+          <div class="form-group">
+            <label for="card-to">받는 사람 (To)</label>
+            <input type="text" id="card-to" value="사랑하는 사람에게" maxlength="20">
+          </div>
+
+          <div class="form-group">
+            <label for="card-message">메시지 (Message)</label>
+            <textarea id="card-message" rows="4" maxlength="150">올 한 해 정말 수고 많았어요! 따뜻하고 웃음 가득한 크리스마스 보내시고, 새해에는 바라는 모든 꿈이 이루어지길 응원합니다. 메리 크리스마스! 🎄</textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="card-from">보내는 사람 (From)</label>
+            <input type="text" id="card-from" value="당신의 든든한 친구로부터" maxlength="20">
+          </div>
+
+          <div class="form-group">
+            <label>카드 테마 스타일</label>
+            <div class="card-theme-selector" id="card-theme-selector">
+              <button type="button" class="theme-btn active" data-theme="classic-red">
+                <span class="theme-dot red"></span> 클래식 레드
+              </button>
+              <button type="button" class="theme-btn" data-theme="forest-green">
+                <span class="theme-dot green"></span> 포레스트 그린
+              </button>
+              <button type="button" class="theme-btn" data-theme="midnight-blue">
+                <span class="theme-dot blue"></span> 윈터 나이트
+              </button>
+              <button type="button" class="theme-btn" data-theme="champagne-gold">
+                <span class="theme-dot gold"></span> 샴페인 골드
+              </button>
+            </div>
+          </div>
+
+          <div class="card-actions">
+            <button id="download-card-btn" class="btn btn-gold btn-block">
+              <span>🖼️ 이미지(PNG)로 저장하기</span>
+            </button>
+            <button id="copy-card-text-btn" class="btn btn-secondary btn-block">
+              <span>📋 텍스트 복사하기</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 카드 실시간 미리보기 -->
+        <div class="card-preview-panel">
+          <div class="card-preview-outer">
+            <div class="holiday-card-canvas-wrap theme-classic-red" id="holiday-card-display">
+              <div class="card-corner corner-tl">❄️</div>
+              <div class="card-corner corner-tr">❄️</div>
+              <div class="card-corner corner-bl">❄️</div>
+              <div class="card-corner corner-br">❄️</div>
+
+              <div class="card-inner-frame">
+                <div class="card-header-badge">★ Merry Christmas & Happy New Year ★</div>
+                
+                <div class="card-art-illustration">
+                  <div class="art-icon">🎅✨🦌</div>
+                </div>
+
+                <div class="card-content-box">
+                  <div class="card-to-line" id="preview-to">To. 사랑하는 사람에게</div>
+                  <p class="card-body-text" id="preview-msg">
+                    올 한 해 정말 수고 많았어요! 따뜻하고 웃음 가득한 크리스마스 보내시고, 새해에는 바라는 모든 꿈이 이루어지길 응원합니다. 메리 크리스마스! 🎄
+                  </p>
+                  <div class="card-from-line" id="preview-from">From. 당신의 든든한 친구로부터</div>
+                </div>
+
+                <div class="card-footer-decor">
+                  <span>🔔 🕯️ 🎁 🌲 ⛄</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="preview-caption">실시간 카드 미리보기</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. 크리스마스 캐릭터 성향 테스트 -->
+    <section id="quiz-section" class="section-container quiz-section">
+      <div class="section-header">
+        <div class="section-tag">HOLIDAY QUIZ</div>
+        <h2 class="section-title">나는 어떤 크리스마스 캐릭터일까? 🔮</h2>
+        <p class="section-desc">간단한 3가지 질문으로 나와 가장 닮은 크리스마스 캐릭터를 알아보세요!</p>
+      </div>
+
+      <div class="quiz-container card-glass">
+        <!-- 퀴즈 단계 화면 -->
+        <div id="quiz-question-screen">
+          <div class="quiz-progress-bar">
+            <div class="quiz-progress-fill" id="quiz-progress-fill"></div>
+          </div>
+          <div class="quiz-step-label" id="quiz-step-label">질문 1 / 3</div>
+
+          <h3 class="quiz-question-title" id="quiz-question-title">
+            크리스마스 이브 저녁, 당신이 가장 꿈꾸는 시간은?
+          </h3>
+
+          <div class="quiz-options-list" id="quiz-options-list">
+            <!-- JS 동적 생성 -->
+          </div>
+        </div>
+
+        <!-- 퀴즈 결과 화면 (초기 hidden) -->
+        <div id="quiz-result-screen" class="hidden">
+          <div class="quiz-result-badge">YOUR HOLIDAY CHARACTER</div>
+          <div class="result-character-avatar" id="result-avatar">🎅</div>
+          <h3 class="result-character-name" id="result-name">산타클로스</h3>
+          <p class="result-character-title" id="result-subtitle">"모두에게 따뜻한 마음을 나누는 사랑 넘치는 리더"</p>
+          <div class="result-character-desc" id="result-desc">
+            주변 사람들을 챙기고 기쁨을 나누는 것을 좋아하는 당신! 넉넉한 품과 따스한 미소로 언제나 사람들에게 든든한 산타 같은 존재입니다.
+          </div>
+
+          <div class="result-match-box">
+            <span class="match-item">✨ 찰떡궁합 친구: <strong id="result-best-match">루돌프</strong></span>
+            <span class="match-item">🎁 추천 선물: <strong id="result-gift">두툼한 수면양말과 핫초코</strong></span>
+          </div>
+
+          <div class="result-buttons">
+            <button id="retry-quiz-btn" class="btn btn-primary">
+              <span>다시 테스트하기</span> 🔄
+            </button>
+            <button id="share-quiz-btn" class="btn btn-secondary">
+              <span>결과 자랑하기</span> 📢
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 푸터 -->
+  <footer class="footer">
+    <div class="footer-snow-hill"></div>
+    <div class="footer-content">
+      <div class="footer-logo">
+        <span class="f-tree">🎄</span> Merry Christmas & Happy Holidays!
+      </div>
+      <p class="footer-blessing">
+        "하늘에는 영광, 땅에는 평화. 당신의 모든 날들이 사랑과 행복으로 가득 차기를 소망합니다."
+      </p>
+      <div class="footer-links">
+        <a href="#hero">처음으로</a> ·
+        <a href="#countdown">디데이</a> ·
+        <a href="#tree-section">소원 트리</a> ·
+        <a href="#gift-section">선물 상자</a> ·
+        <a href="#carol-section">캐롤</a> ·
+        <a href="#card-section">카드 만들기</a>
+      </div>
+      <div class="footer-copy">
+        Crafted with warmth & holiday cheer ❄️ 2026 Christmas One-Page Special
+      </div>
+    </div>
+  </footer>
+
+  <!-- 소원 상세 보기 모달 -->
+  <div id="wish-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <button class="modal-close-btn" id="modal-close-btn" aria-label="닫기">×</button>
+      <div class="modal-decor" id="modal-decor">🎄</div>
+      <div class="modal-badge">CHRISTMAS WISH</div>
+      <h3 class="modal-author" id="modal-author">소원 작성자</h3>
+      <div class="modal-divider"></div>
+      <p class="modal-message" id="modal-message">소원 내용이 여기에 표시됩니다.</p>
+      <div class="modal-footer-text">✨ 이 소원이 꼭 하늘에 닿아 이루어지기를! ✨</div>
+    </div>
+  </div>
+
+  <!-- 선물 상자 열림 모달 -->
+  <div id="gift-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true">
+    <div class="modal-card gift-modal-card">
+      <button class="modal-close-btn" id="gift-modal-close-btn" aria-label="닫기">×</button>
+      <div class="gift-modal-icon" id="gift-modal-icon">🎁</div>
+      <div class="modal-badge" id="gift-modal-badge">SANTA'S GIFT</div>
+      <h3 class="modal-title" id="gift-modal-title">선물 제목</h3>
+      <p class="gift-modal-body" id="gift-modal-body">선물 내용</p>
+      <div class="gift-modal-extra" id="gift-modal-extra">
+        <!-- 추천 영화나 레시피, 쿠폰 상세 -->
+      </div>
+      <button class="btn btn-gold btn-block" id="gift-modal-confirm-btn">
+        고마워요, 산타! 🎅
+      </button>
+    </div>
+  </div>
+
+  <!-- 토스트 알림창 -->
+  <div id="toast" class="toast hidden">메시지가 복사되었습니다!</div>
+
+  <!-- 스크롤 맨 위로 버튼 -->
+  <button id="back-to-top" class="back-to-top" title="맨 위로 가기" aria-label="맨 위로 가기">
+    ▲
+  </button>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
