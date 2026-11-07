@@ -4,6 +4,9 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  // 0. 다크 / 화이트 모드 토글 초기화
+  initThemeToggle();
+
   // 1. 눈 내리는 애니메이션 초기화
   initSnowfall();
 
@@ -102,9 +105,18 @@ function initSnowfall() {
       ctx.save();
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha})`;
-      ctx.shadowBlur = p.radius > 2 ? 6 : 0;
-      ctx.shadowColor = 'rgba(255, 255, 255, 0.8)';
+      
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      if (isLight) {
+        ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(p.alpha + 0.25, 0.98)})`;
+        ctx.shadowBlur = 4;
+        ctx.shadowColor = 'rgba(100, 150, 205, 0.7)';
+      } else {
+        ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha})`;
+        ctx.shadowBlur = p.radius > 2 ? 6 : 0;
+        ctx.shadowColor = 'rgba(255, 255, 255, 0.8)';
+      }
+
       ctx.fill();
       ctx.restore();
     }
@@ -1179,4 +1191,43 @@ function initBackToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 }
+
+/* ==========================================================================
+   11. Dark & Light (White) Theme Switcher
+   ========================================================================== */
+function initThemeToggle() {
+  const themeBtn = document.getElementById('theme-toggle-btn');
+  if (!themeBtn) return;
+
+  const iconEl = themeBtn.querySelector('.theme-icon');
+  const textEl = themeBtn.querySelector('.theme-text');
+
+  // 저장된 테마 또는 기본 다크
+  const currentTheme = localStorage.getItem('christmas_theme') || 'dark';
+  applyThemeUI(currentTheme);
+
+  themeBtn.addEventListener('click', () => {
+    const active = document.documentElement.getAttribute('data-theme') || 'dark';
+    const nextTheme = active === 'dark' ? 'light' : 'dark';
+
+    document.documentElement.setAttribute('data-theme', nextTheme);
+    localStorage.setItem('christmas_theme', nextTheme);
+    applyThemeUI(nextTheme);
+
+    showToast(nextTheme === 'light' ? '☀️ 화사한 화이트 크리스마스 모드입니다!' : '🌙 포근한 밤하늘 다크 모드입니다!');
+  });
+
+  function applyThemeUI(theme) {
+    if (theme === 'light') {
+      if (iconEl) iconEl.textContent = '☀️';
+      if (textEl) textEl.textContent = '화이트';
+      themeBtn.title = '다크 모드로 전환';
+    } else {
+      if (iconEl) iconEl.textContent = '🌙';
+      if (textEl) textEl.textContent = '다크';
+      themeBtn.title = '화이트 모드로 전환';
+    }
+  }
+}
+
 
